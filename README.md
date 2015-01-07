@@ -1,6 +1,6 @@
 # BookscanClient
 
-TODO: Write a gem description
+Unofficial bookscan client library for ruby
 
 ## Installation
 
@@ -20,7 +20,15 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+require "bookscan_client"
+
+client = BookscanClient.new
+client.login("user@example.com", "password")
+
+books = client.books
+...
+```
 
 ## Contributing
 
