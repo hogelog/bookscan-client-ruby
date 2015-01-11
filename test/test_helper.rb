@@ -8,10 +8,15 @@ require "webmock/minitest"
 WEBMOCK_DATADIR = File.expand_path('../data', __FILE__)
 WEBMOCK_PAGES = {
     BookscanClient::URL::MYPAGE => "mypage.html",
+    BookscanClient::URL::OPTIMIZED_BOOKS => "optimized_books.html",
 }
-WEBMOCK_PAGES.each do |url, filename|
-  path = File.expand_path(filename, WEBMOCK_DATADIR)
-  WebMock.
-      stub_request(:get, url).
-      to_return(body: File.new(path), status: 200, headers: { 'Content-Type' => 'text/html' })
+
+def stub_requests
+  WEBMOCK_PAGES.each do |url, filename|
+    path = File.join(WEBMOCK_DATADIR, filename)
+    WebMock.
+        stub_request(:get, url).
+        to_return(body: File.new(path), status: 200, headers: { 'Content-Type' => 'text/html' })
+    p "stub #{url}"
+  end
 end
